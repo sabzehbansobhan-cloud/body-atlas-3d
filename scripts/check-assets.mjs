@@ -31,7 +31,8 @@ for (const f of ['index.html', 'manifest.webmanifest', 'icon.svg', 'icon-192.png
 if (root !== 'public' && existsSync(at('assets'))) {
   for (const f of readdirSync(at('assets')).filter((n) => n.endsWith('.js'))) {
     const t = readFileSync(at('assets/' + f), 'utf8')
-    if (/["'`]\/(models|organs)\//.test(t)) fail(`assets/${f} still has an absolute /models or /organs path`)
+    const matches = t.match(/["'`]\/(models|organs)\/[^"'`]*/g) || []
+for (const path of matches) fail(`assets/${f} has absolute path: ${path}`)
   }
 }
 console.log(bad ? `\n${bad} problem(s), ${ok} ok` : `\nAll good — ${ok} files checked in ${root}/`)
