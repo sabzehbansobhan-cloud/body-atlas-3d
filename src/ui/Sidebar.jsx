@@ -90,7 +90,7 @@ export default function Sidebar() {
   return (
     <aside className="sidebar">
       <a className="brand" href="#" onClick={(e) => { e.preventDefault(); showAll() }}>
-        Body Atlas
+        اطلس بدن
       </a>
       <BodySwitch />
       <nav className="side-nav" aria-label="Body systems and regions">

@@ -147,7 +147,7 @@ function RegionView({ id }) {
       </div>
       <h1 className="title">{fa(r.name)}</h1>
       <div className="tags"><span>Body region</span><span>{total.toLocaleString()} structures</span></div>
-      <p className="lede">{r.blurb}</p>
+      <p className="lede">{fa(r.blurb)}</p>
       {starts.length > 0 && (
         <section className="block">
           <h2>از این موارد شروع کنید</h2>
@@ -192,7 +192,7 @@ function SelectionView({ sel }) {
     ? [...f.facts, ['ruler', 'اندازه مدل', sizeLabel(sel.partIds)]]
     : [
         ['layers', 'دستگاه', fa(system?.name ?? sel.system)],
-        ['pin', 'Region', first ? fa(REGION_BY_ID[index.partRegion.get(first.id)].name) : '—'],
+        ['pin', 'ناحیه', first ? fa(REGION_BY_ID[index.partRegion.get(first.id)].name) : '—'],
         ['side', 'سمت', fa(sideOf(sel.name))],
         ['ruler', 'اندازه مدل', sizeLabel(sel.partIds)],
         ['cube', 'اجزای هندسی', sel.partIds.length.toLocaleString()],
@@ -216,14 +216,14 @@ function SelectionView({ sel }) {
       <div className="tags">
         {(f?.tags ?? [system?.name, sel.kind === 'concept' ? 'Group' : 'Structure']).map((t) => <span key={t}>{fa(t)}</span>)}
       </div>
-      <p className="lede">{f ? f.text : systemBlurb(sel.system)}</p>
+      <p className="lede">{fa(f ? f.text : systemBlurb(sel.system))}</p>
       <Facts rows={facts} />
       {partOf.length > 0 && (
         <section className="block">
           <h2>بخشی از</h2>
           <div className="chips">
             {partOf.map((c) => (
-              <button key={c.id} className="chip" onClick={() => selectConcept(c.name)}>{pretty(c.name)}</button>
+              <button key={c.id} className="chip" onClick={() => selectConcept(c.name)}>{fa(pretty(c.name))}</button>
             ))}
           </div>
         </section>
@@ -267,20 +267,20 @@ function OrganPanel({ sel }) {
         </button>
         <div className="eyebrow">{organ.latin}</div>
       </div>
-      <h1 className="title">{organ.title}</h1>
-      <div className="tags">{organ.tags.map((t) => <span key={t}>{t}</span>)}</div>
-      <p className="lede">{organ.text}</p>
+      <h1 className="title">{fa(organ.title)}</h1>
+      <div className="tags">{organ.tags.map((t) => <span key={t}>{fa(t)}</span>)}</div>
+      <p className="lede">{fa(organ.text)}</p>
       {structure && (
         <div className="structure-card" key={structure.id} style={{ '--c': structure.color }}>
-          <div className="eyebrow">{structure.group}</div>
-          <h3><span className="chip-dot" />{structure.label}</h3>
-          <p>{structure.description}</p>
+          <div className="eyebrow">{fa(structure.group)}</div>
+          <h3><span className="chip-dot" />{fa(structure.label)}</h3>
+          <p>{fa(structure.description)}</p>
         </div>
       )}
       {organError && <p className="organ-error">{organError}</p>}
       <section className="block">
-        <h2>Structures</h2>
-        <p className="hint">{ready ? 'Click the model, or a name below.' : 'Lifting the organ out of the body…'}</p>
+        <h2>ساختارها</h2>
+        <p className="hint">{ready ? 'روی مدل یا یکی از نام‌های زیر کلیک کنید.' : 'در حال جداکردن اندام از بدن…'}</p>
         {groups.map(([group, list]) => (
           <div className="group" key={group}>
             <div className="group-name">{group}</div>
