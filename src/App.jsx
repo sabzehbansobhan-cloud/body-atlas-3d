@@ -11,6 +11,7 @@ import { BODIES } from './bodies.js'
 import { useHashLink, REPO, IMLISTACK } from './links.js'
 import { ORGANS, PICKS } from './organs.js'
 import { MOTION, REDUCED } from './motion.js'
+import { fa } from './fa.js'
 
 function SearchBox() {
   const [q, setQ] = useState('')
@@ -45,7 +46,7 @@ function SearchBox() {
       <input
         ref={inputRef}
         value={q}
-        placeholder={ready ? 'Search anatomy' : 'Loading anatomy…'}
+        placeholder={ready ? 'جست‌وجوی ساختارهای بدن' : 'در حال بارگذاری کالبدشناسی…'}
         disabled={!ready}
         onChange={(e) => { setQ(e.target.value); setOpen(true); setActive(0) }}
         onFocus={() => setOpen(true)}
@@ -56,7 +57,7 @@ function SearchBox() {
           if (e.key === 'Enter' && results[active]) pick(results[active])
           if (e.key === 'Escape') { setQ(''); e.currentTarget.blur() }
         }}
-        aria-label="Search anatomy"
+        aria-label="جست‌وجوی ساختارهای بدن"
       />
       <kbd>/</kbd>
       {open && results.length > 0 && (
@@ -66,8 +67,8 @@ function SearchBox() {
               className={i === active ? 'is-active' : ''}
               onMouseDown={(e) => { e.preventDefault(); pick(r) }}
               onMouseEnter={() => setActive(i)}>
-              <span>{r.label}</span>
-              <small>{r.kind === 'concept' && r.size > 1 ? `${r.size} parts` : 'structure'}</small>
+              <span>{fa(r.label)}</span>
+              <small>{r.kind === 'concept' && r.size > 1 ? `${r.size} بخش` : 'ساختار'}</small>
             </li>
           ))}
         </ul>
@@ -93,7 +94,7 @@ function QuickPicks() {
           <button key={key} role="listitem" disabled={!ready || missing} title={missing ? `Not in the ${BODIES[body].label.toLowerCase()} reference body` : undefined} className={`pick ${active ? 'is-active' : ''}`}
             onClick={() => (p.organ ? openOrgan(p.organ) : selectFeatured(p.featured))}>
             <span className="pick-dot" style={{ '--c': SYSTEM_BY_ID[item.system].color }} />
-            <span className="pick-title">{item.title}</span>
+            <span className="pick-title">{fa(item.title)}</span>
             <span className="pick-latin">{item.latin}</span>
           </button>
         )
@@ -124,21 +125,21 @@ function Tools() {
   return (
     <div className="tools">
       <div className="tool-group">
-        {tool('zoomIn', 'Zoom in', () => st.cameraCommand('zoomIn'), { key: '+' })}
-        {tool('zoomOut', 'Zoom out', () => st.cameraCommand('zoomOut'), { key: '−' })}
-        {tool('fit', 'Fit to view', () => st.cameraCommand(hasSel ? 'selection' : 'home'), { key: 'F' })}
+        {tool('zoomIn', 'بزرگ‌نمایی', () => st.cameraCommand('zoomIn'), { key: '+' })}
+        {tool('zoomOut', 'کوچک‌نمایی', () => st.cameraCommand('zoomOut'), { key: '−' })}
+        {tool('fit', 'تنظیم قاب نمایش', () => st.cameraCommand(hasSel ? 'selection' : 'home'), { key: 'F' })}
       </div>
       <div className="tool-group">
-        {tool('isolate', organMode ? 'Hide the body' : 'Isolate selection', st.toggleIsolate, { on: isolate, disabled: !hasSel, key: 'I' })}
-        {tool('xray', 'X-ray', st.toggleXray, { on: xray, disabled: organMode, key: 'X' })}
-        {tool('explode', 'Exploded view', st.toggleExplode, { on: explode, disabled: !ready || organMode || quiz, key: 'E' })}
-        {tool('tag', 'Pinned labels', st.togglePins, { on: pinsOn, disabled: !ready || quiz, key: 'N' })}
+        {tool('isolate', organMode ? 'پنهان‌کردن بدن' : 'نمایش جداگانه ساختار', st.toggleIsolate, { on: isolate, disabled: !hasSel, key: 'I' })}
+        {tool('xray', 'نمای پرتو ایکس', st.toggleXray, { on: xray, disabled: organMode, key: 'X' })}
+        {tool('explode', 'نمای تفکیک‌شده', st.toggleExplode, { on: explode, disabled: !ready || organMode || quiz, key: 'E' })}
+        {tool('tag', 'برچسب‌های سنجاق‌شده', st.togglePins, { on: pinsOn, disabled: !ready || quiz, key: 'N' })}
       </div>
       <div className="tool-group">
-        {tool('sun', 'Studio light', st.toggleLight, { on: light === 'contrast', key: 'L' })}
+        {tool('sun', 'نورپردازی', st.toggleLight, { on: light === 'contrast', key: 'L' })}
         {tool('hq', hq ? 'Ambient occlusion on' : 'Ambient occlusion off — faster', st.toggleHq, { on: hq, key: 'H' })}
-        {tool('focus', 'Focus mode', () => st.togglePanel('focus'), { on: focus, key: '\\' })}
-        {tool('camera', 'Save image', st.takeSnapshot, { disabled: !ready, key: 'P' })}
+        {tool('focus', 'حالت تمرکز', () => st.togglePanel('focus'), { on: focus, key: '\\' })}
+        {tool('camera', 'ذخیره تصویر', st.takeSnapshot, { disabled: !ready, key: 'P' })}
       </div>
     </div>
   )
@@ -163,7 +164,7 @@ function ExplodeBar() {
   )
 }
 
-const VIEWS = [['front', 'Front', '1'], ['back', 'Back', '2'], ['leftSide', 'Left', '3'], ['rightSide', 'Right', '4']]
+const VIEWS = [['front', 'جلو', '1'], ['back', 'پشت', '2'], ['leftSide', 'چپ', '3'], ['rightSide', 'راست', '4']]
 
 function Turntable() {
   const autoRotate = useAtlas((s) => s.autoRotate)
@@ -191,9 +192,9 @@ function Caption() {
   const quiz = useAtlas((s) => s.quiz)
   const region = useAtlas((s) => s.region)
   const explode = useAtlas((s) => s.explode)
-  let text = 'Turn the body slowly. Every structure is one click away.'
+  let text = 'بدن را بچرخانید؛ با انتخاب هر بخش، اطلاعات آن نمایش داده می‌شود.'
   if (quiz && quiz.state !== 'done') text = quiz.state === 'ask' || quiz.state === 'wrong'
-    ? `Find the ${quiz.rounds[quiz.i].title.toLowerCase()}.` : quiz.state === 'right' ? 'Found it.' : 'Here it is.'
+    ? `Find the ${fa(quiz.rounds[quiz.i].title.toLowerCase())}.` : quiz.state === 'right' ? 'Found it.' : 'Here it is.'
   else if (selection?.kind === 'organ') text = ORGANS[selection.organKey].caption
   else if (selection?.featured) text = selection.featured.caption
   else if (selection) text = 'Drag to look around it · scroll to come closer.'
@@ -234,8 +235,8 @@ function HoverLabel() {
   return (
     <div className="hover-label" style={{ transform: `translate(${hover.x + 16}px, ${hover.y + 14}px)` }} aria-hidden="true">
       <span className="chip-dot" style={{ '--c': system?.color }} />
-      <span>{part.name}</span>
-      <small>{system?.name}</small>
+      <span>{fa(part.name)}</span>
+      <small>{fa(system?.name)}</small>
     </div>
   )
 }
@@ -288,7 +289,7 @@ function HelpSheet() {
           <div className="eyebrow">Body Atlas</div>
           <button className="icon-btn ghost" onClick={() => setHelp(false)} aria-label="Close" autoFocus><Icon name="close" size={17} /></button>
         </div>
-        <h2 id="sheet-title">Shortcuts & credits</h2>
+        <h2 id="sheet-title">راهنما و منابع</h2>
         <dl className="keys hide-touch">
           {SHORTCUTS.map(([k, label]) => (
             <div key={label}><dt><kbd>{k}</kbd></dt><dd>{label}</dd></div>

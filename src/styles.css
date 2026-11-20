@@ -8,8 +8,8 @@
   --soft: #ece5d6;
   --accent: #56653f;
   --accent-ink: #f5f3ea;
-  --serif: 'Newsreader', 'Iowan Old Style', Georgia, serif;
-  --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --serif: 'Vazirmatn', system-ui, sans-serif;
+  --sans: 'Vazirmatn', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --ink-2: #36322b;
   --icon-ink: #4a443a;
   --glass: rgba(250, 247, 240, .82);
@@ -48,6 +48,12 @@
 }
 
 * { box-sizing: border-box; }
+html, body, #root { direction: rtl; }
+.app { direction: ltr; }
+.sidebar, .right { direction: rtl; }
+.stage, canvas, .tools, .turntable, .views { direction: ltr; }
+button, input { font-family: var(--sans); }
+.nav-row, .region-btn, .feature-card, .right, .panel { text-align: right; }
 html, body, #root { height: 100%; margin: 0; }
 body {
   background: var(--bg);

@@ -45,6 +45,16 @@ function Body() {
         if (!res.ok) throw new Error(`The ${BODIES[body].label.toLowerCase()} body couldn’t load.`)
         const atlas = await res.json()
         if (abort.signal.aborted) return
+        // School-friendly male reference: remove only external genital structures.
+        if (body === 'male') {
+          const hidden = new Set(atlas.parts.filter((part) =>
+            /^(glans penis|corpus cavernosum of penis|corpus spongiosum of penis|left testis|right testis|testis)$/i.test(part.name.trim())
+          ).map((part) => part.id))
+          atlas.parts = atlas.parts.filter((part) => !hidden.has(part.id))
+          atlas.concepts = atlas.concepts.map((concept) => ({
+            ...concept, elements: concept.elements.filter((id) => !hidden.has(id)),
+          })).filter((concept) => concept.elements.length > 0)
+        }
         buildIndex(atlas, body)
         await loadModel(atlas, {
           signal: abort.signal,

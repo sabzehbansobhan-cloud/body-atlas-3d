@@ -6,18 +6,18 @@ export const asset = (p) => import.meta.env.BASE_URL + p.replace(/^\//, '')
 
 export const BODIES = {
   male: {
-    id: 'male', label: 'Male',
+    id: 'male', label: 'مرد',
     atlas: asset('models/atlas.json'),
-    eyebrow: 'Homo sapiens · adult male reference',
+    eyebrow: 'مرجع کالبدشناسی مرد بالغ · انسان خردمند',
     source: 'BodyParts3D 4.0',
     credit: 'BodyParts3D 4.0 © DBCLS (CC BY 4.0)',
     aliases: {},
     blurbs: {},
   },
   female: {
-    id: 'female', label: 'Female',
+    id: 'female', label: 'زن',
     atlas: asset('models/atlas-female.json'),
-    eyebrow: 'Homo sapiens · adult female reference',
+    eyebrow: 'مرجع کالبدشناسی زن بالغ · انسان خردمند',
     source: 'Human Reference Atlas, female v1.5',
     credit: 'HuBMAP Human Reference Atlas, 3D Reference Organ Set for Female v1.5 (CC BY 4.0)',
     note: 'Organs, spine, pelvis and legs come from the female reference set. The skull, ribcage, shoulders, arms, feet, muscles, vessels, nerves and glands are BodyParts3D structures fitted to this body, so every system is there as in the male body. Placenta and umbilical structures sit under Pregnancy reference and start hidden.',

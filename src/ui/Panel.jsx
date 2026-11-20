@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { useAtlas, index, selectionBounds, systemBlurb, partsOfConcepts, pinOf } from '../store.js'
 import { SYSTEMS, SYSTEM_BY_ID, REGION_BY_ID, pretty } from '../data.js'
 import { BODIES } from '../bodies.js'
+import { fa } from '../fa.js'
 import { ORGANS } from '../organs.js'
 import { MOTION, REDUCED } from '../motion.js'
 import Icon from './Icon.jsx'
@@ -9,7 +10,7 @@ import Icon from './Icon.jsx'
 function Facts({ rows }) {
   return (
     <section className="block">
-      <h2>Key facts</h2>
+      <h2>اطلاعات کلیدی</h2>
       <dl className="facts">
         {rows.map(([icon, k, v]) => (
           <div className="fact" key={k}>
@@ -46,28 +47,28 @@ function Overview() {
   return (
     <>
       <div className="eyebrow">{body.eyebrow}</div>
-      <h1 className="title">The Human Body</h1>
-      <div className="tags"><span>3D atlas</span><span>{m ? `${m.systems} systems` : body.label}</span><span>Free & open</span></div>
+      <h1 className="title">بدن انسان</h1>
+      <div className="tags"><span>اطلس سه‌بعدی</span><span>{m ? `${m.systems} دستگاه` : body.label}</span><span>رایگان و آزاد</span></div>
       <p className="lede">
-        A full-body anatomy explorer that runs in your browser. Turn the body, peel back layers by system
-        and click any structure — a bone, a vessel, a nerve — to learn what it is and where it sits.
+        یک اطلس تعاملی کالبدشناسی که در مرورگر اجرا می‌شود. بدن را بچرخانید و لایه‌های هر دستگاه را جداگانه بررسی کنید
+        و با انتخاب هر ساختار، مانند استخوان، رگ یا عصب، جایگاه آن را بررسی کنید.
       </p>
       {body.note && <p className="note">{body.note}</p>}
       <Facts rows={[
-        ['cube', 'Structures', n(m?.parts)],
-        ['layers', 'Systems', n(m?.systems)],
-        ['spark', 'Named concepts', n(m?.concepts)],
-        ['ruler', 'Triangles', m ? millions(m.triangles) : '…'],
-        ['link', 'Source', body.source],
+        ['cube', 'ساختارها', n(m?.parts)],
+        ['layers', 'دستگاه‌ها', n(m?.systems)],
+        ['spark', 'نام‌های ثبت‌شده', n(m?.concepts)],
+        ['ruler', 'تعداد مثلث‌ها', m ? millions(m.triangles) : '…'],
+        ['link', 'منبع', body.source],
       ]} />
       <section className="block">
-        <h2>How to explore</h2>
+        <h2>روش کار با اطلس</h2>
         <ul className="howto">
-          <li><b>Drag</b> to orbit · <b>scroll</b> to zoom · <b>right-drag</b> to pan</li>
-          <li><b>Click</b> a structure to inspect it</li>
-          <li>Use the <Icon name="eye" size={15} /> toggles to show or hide systems, or <b>Opacity</b> to fade them</li>
-          <li>Pick a <b>region</b> to study the head, trunk or limbs on their own</li>
-          <li><Icon name="explode" size={15} /> <b>Explode</b> spreads the pieces apart; <Icon name="tag" size={15} /> pins labels</li>
+          <li>برای چرخاندن مدل بکشید · برای بزرگ‌نمایی اسکرول کنید · برای جابه‌جایی با دکمه راست بکشید</li>
+          <li>برای بررسی، روی یک ساختار کلیک کنید</li>
+          <li>Use the <Icon name="eye" size={15} /> toggles to show or hide systems, or از گزینه <b>شفافیت</b> برای کم‌رنگ‌کردن آن‌ها استفاده کنید</li>
+          <li>Pick a یک <b>ناحیه</b> را برای بررسی جداگانه سر، تنه یا اندام‌ها انتخاب کنید</li>
+          <li><Icon name="explode" size={15} /> گزینه <b>تفکیک</b> اجزا را از هم فاصله می‌دهد؛ <Icon name="tag" size={15} /> pins labels</li>
         </ul>
       </section>
     </>
@@ -92,11 +93,11 @@ function SystemView({ id }) {
   return (
     <>
       <div className="eyebrow">{s.latin}</div>
-      <h1 className="title">{s.name}</h1>
-      <div className="tags"><span>Body system</span><span>{count} structures</span></div>
+      <h1 className="title">{fa(s.name)}</h1>
+      <div className="tags"><span>دستگاه بدن</span><span>{count} ساختار</span></div>
       <p className="lede">{systemBlurb(id, body)}</p>
       <section className="block">
-        <h2>Start with</h2>
+        <h2>از این موارد شروع کنید</h2>
         <div className="chips">
           {examples.map((n) => (
             <button key={n} className="chip" onClick={() => {
@@ -106,7 +107,7 @@ function SystemView({ id }) {
                 const p = [...index.parts.values()].find((x) => x.name.toLowerCase().endsWith(n.toLowerCase()))
                 if (p) useAtlas.getState().selectPart(p.id)
               }
-            }}>{pretty(n)}</button>
+            }}>{fa(pretty(n))}</button>
           ))}
         </div>
       </section>
@@ -144,23 +145,23 @@ function RegionView({ id }) {
           <Icon name="close" size={17} />
         </button>
       </div>
-      <h1 className="title">{r.name}</h1>
+      <h1 className="title">{fa(r.name)}</h1>
       <div className="tags"><span>Body region</span><span>{total.toLocaleString()} structures</span></div>
       <p className="lede">{r.blurb}</p>
       {starts.length > 0 && (
         <section className="block">
-          <h2>Start with</h2>
+          <h2>از این موارد شروع کنید</h2>
           <div className="chips">
-            {starts.map((n) => <button key={n} className="chip" onClick={() => selectConcept(n)}>{pretty(n)}</button>)}
+            {starts.map((n) => <button key={n} className="chip" onClick={() => selectConcept(n)}>{fa(pretty(n))}</button>)}
           </div>
         </section>
       )}
       <section className="block">
-        <h2>By system</h2>
+        <h2>بر اساس دستگاه</h2>
         <ul className="bars">
           {bySystem.map(([s, k]) => (
             <li key={s.id} style={{ '--c': s.color }}>
-              <span className="bar-name">{s.name}</span>
+              <span className="bar-name">{fa(s.name)}</span>
               <span className="bar-track"><span style={{ transform: `scaleX(${k / top})` }} /></span>
               <span className="bar-val">{k}</span>
             </li>
@@ -188,19 +189,19 @@ function SelectionView({ sel }) {
   }, [sel])
 
   const facts = f
-    ? [...f.facts, ['ruler', 'Model size', sizeLabel(sel.partIds)]]
+    ? [...f.facts, ['ruler', 'اندازه مدل', sizeLabel(sel.partIds)]]
     : [
-        ['layers', 'System', system?.name ?? sel.system],
-        ['pin', 'Region', first ? REGION_BY_ID[index.partRegion.get(first.id)].name : '—'],
-        ['side', 'Side', sideOf(sel.name)],
-        ['ruler', 'Model size', sizeLabel(sel.partIds)],
-        ['cube', 'Meshes', sel.partIds.length.toLocaleString()],
+        ['layers', 'دستگاه', fa(system?.name ?? sel.system)],
+        ['pin', 'Region', first ? fa(REGION_BY_ID[index.partRegion.get(first.id)].name) : '—'],
+        ['side', 'سمت', fa(sideOf(sel.name))],
+        ['ruler', 'اندازه مدل', sizeLabel(sel.partIds)],
+        ['cube', 'اجزای هندسی', sel.partIds.length.toLocaleString()],
       ]
 
   return (
     <>
       <div className="eyebrow-row">
-        <div className="eyebrow">{f ? f.latin : system?.name}</div>
+        <div className="eyebrow">{f ? f.latin : fa(system?.name)}</div>
         <span className="eyebrow-actions">
           <button className={`icon-btn ghost ${pinned ? 'is-on' : ''}`} onClick={() => togglePin(sel)} aria-pressed={pinned}
             aria-label={pinned ? 'Unpin label' : 'Pin a label on the body'} title={pinned ? 'Unpin label' : 'Pin label'}>
@@ -211,15 +212,15 @@ function SelectionView({ sel }) {
           </button>
         </span>
       </div>
-      <h1 className={`title ${sel.name.length > 22 ? 'is-long' : ''}`}>{sel.name}</h1>
+      <h1 className={`title ${sel.name.length > 22 ? 'is-long' : ''}`}>{fa(sel.name)}</h1>
       <div className="tags">
-        {(f?.tags ?? [system?.name, sel.kind === 'concept' ? 'Group' : 'Structure']).map((t) => <span key={t}>{t}</span>)}
+        {(f?.tags ?? [system?.name, sel.kind === 'concept' ? 'Group' : 'Structure']).map((t) => <span key={t}>{fa(t)}</span>)}
       </div>
       <p className="lede">{f ? f.text : systemBlurb(sel.system)}</p>
       <Facts rows={facts} />
       {partOf.length > 0 && (
         <section className="block">
-          <h2>Part of</h2>
+          <h2>بخشی از</h2>
           <div className="chips">
             {partOf.map((c) => (
               <button key={c.id} className="chip" onClick={() => selectConcept(c.name)}>{pretty(c.name)}</button>

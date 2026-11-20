@@ -4,6 +4,7 @@ import { SYSTEMS, REGIONS } from '../data.js'
 import { BODIES, BODY_IDS } from '../bodies.js'
 import Icon from './Icon.jsx'
 import { REPO, IMLISTACK } from '../links.js'
+import { fa } from '../fa.js'
 
 function storedFolds() {
   try {
@@ -39,7 +40,7 @@ function OpacityRow({ system, value }) {
   const setOpacity = useAtlas((s) => s.setOpacity)
   return (
     <label className="opacity-row" style={{ '--c': system.color }}>
-      <span className="sr-only">{system.name} opacity</span>
+      <span className="sr-only">{fa(system.name)} شفافیت</span>
       <input type="range" min="0" max="1" step="0.05" value={value}
         onChange={(e) => setOpacity(system.id, Number(e.target.value))}
         style={{ '--p': `${value * 100}%` }} />
@@ -57,7 +58,7 @@ function BodySwitch() {
       {BODY_IDS.map((id) => (
         <button key={id} role="radio" aria-checked={body === id} className={body === id ? 'is-on' : ''}
           onClick={() => setBody(id)}>
-          {BODIES[id].label}
+          {fa(BODIES[id].label)}
         </button>
       ))}
     </div>
@@ -95,15 +96,15 @@ export default function Sidebar() {
       <nav className="side-nav" aria-label="Body systems and regions">
         <button className={`nav-row ${homeActive ? 'is-active' : ''}`} onClick={showAll}>
           <Icon name="home" />
-          <span className="nav-text"><span className="nav-title">Whole body</span></span>
+          <span className="nav-text"><span className="nav-title">کل بدن</span></span>
         </button>
         <button className={`nav-row ${featuredActive ? 'is-active' : ''}`} onClick={() => openOrgan('heart')}>
           <Icon name="star" />
-          <span className="nav-text"><span className="nav-title">Featured</span></span>
+          <span className="nav-text"><span className="nav-title">منتخب‌ها</span></span>
         </button>
         <button className={`nav-row ${quiz ? 'is-active' : ''}`} onClick={startQuiz} disabled={!ready}>
           <Icon name="target" />
-          <span className="nav-text"><span className="nav-title">Quiz yourself</span></span>
+          <span className="nav-text"><span className="nav-title">آزمون آناتومی</span></span>
         </button>
         <div className="nav-scroll">
           <Group id="regions" title="Regions" folds={folds} setFolds={setFolds}>
@@ -112,7 +113,7 @@ export default function Sidebar() {
                 <button key={r.id} className={`region-btn ${region === r.id ? 'is-active' : ''}`} disabled={!ready}
                   onClick={() => showRegion(r.id)} aria-pressed={region === r.id}>
                   <Icon name={r.icon} size={18} />
-                  <span>{r.name}</span>
+                  <span>{fa(r.name)}</span>
                 </button>
               ))}
             </div>
@@ -140,8 +141,8 @@ export default function Sidebar() {
                     <button className="system-main" onClick={() => showSystem(s.id)}>
                       <span className="swatch" style={{ '--c': s.color, opacity: on ? Math.max(0.25, layerOpacity[s.id] ?? 1) : undefined }} />
                       <span className="nav-text">
-                        <span className="nav-title">{s.name}</span>
-                        <span className="nav-sub">{counts[s.id] ? `${counts[s.id]} structures` : '—'}</span>
+                        <span className="nav-title">{fa(s.name)}</span>
+                        <span className="nav-sub">{counts[s.id] ? `${counts[s.id]} ساختار` : '—'}</span>
                       </span>
                     </button>
                     <button className="eye" onClick={() => toggleSystem(s.id)}
@@ -158,7 +159,7 @@ export default function Sidebar() {
       </nav>
 
       <div className="feature-card">
-        <div className="eyebrow">Featured structure</div>
+        <div className="eyebrow">ساختار منتخب</div>
         <div className="feature-art" aria-hidden="true">
           <svg viewBox="0 0 120 80">
             <path d="M60 70C30 50 18 36 18 24a16 16 0 0 1 30-8c4 6 8 6 12 0a16 16 0 0 1 30 8c0 12-12 26-30 46z"
@@ -166,10 +167,10 @@ export default function Sidebar() {
             <path d="M48 14c4-8 8-10 12-10M70 12c2-6 6-9 10-9" stroke="#8f3f3a" strokeWidth="3" fill="none" strokeLinecap="round" />
           </svg>
         </div>
-        <h3>A rhythm that never rests.</h3>
-        <p>Four chambers, two circuits and around 100,000 beats every day.</p>
+        <h3>ضربانی که هرگز متوقف نمی‌شود.</h3>
+        <p>چهار حفره، دو مسیر گردش خون و حدود ۱۰۰ هزار ضربان در روز.</p>
         <button className="link-btn" disabled={!ready} onClick={() => openOrgan('heart')}>
-          Explore the heart <Icon name="arrow" size={16} />
+          کاوش قلب <Icon name="arrow" size={16} />
         </button>
       </div>
 
