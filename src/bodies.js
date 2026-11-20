@@ -20,7 +20,7 @@ export const BODIES = {
     eyebrow: 'مرجع کالبدشناسی زن بالغ · انسان خردمند',
     source: 'Human Reference Atlas, female v1.5',
     credit: 'HuBMAP Human Reference Atlas, 3D Reference Organ Set for Female v1.5 (CC BY 4.0)',
-    note: 'Organs, spine, pelvis and legs come from the female reference set. The skull, ribcage, shoulders, arms, feet, muscles, vessels, nerves and glands are BodyParts3D structures fitted to this body, so every system is there as in the male body. Placenta and umbilical structures sit under Pregnancy reference and start hidden.',
+    note: 'Organs, spine, pelvis and legs come from the female reference set. The skull, ribcage, shoulders, arms, feet, muscles, vessels, nerves and glands are BodyParts3D structures fitted to this body, so every system is there as in the male body. جفت و ساختارهای بند ناف در بخش «مرجع بارداری» قرار دارند و در آغاز پنهان هستند.',
     // The feature lists in data.js and organs.js use BodyParts3D (FMA) names. These are the
     // matching concept names in the female atlas, looked up in place of (or as well as) them.
     aliases: {
@@ -41,7 +41,7 @@ export const BODIES = {
     },
     blurbs: {
       reproductive: 'The female reproductive structures of this reference body: ovaries, uterine tubes, uterus and vagina, with the ligaments that hold them, and the mammary glands.',
-      skeletal: 'The skeleton is the body’s scaffold. The spine, pelvis and legs come from the female reference set; the skull, ribcage, shoulders, arms and feet are BodyParts3D bones fitted to its proportions.',
+      skeletal: 'اسکلت چارچوب نگهدارندهٔ بدن است. ستون مهره‌ها، لگن و پاها از مدل مرجع زن گرفته شده‌اند؛ جمجمه، قفسهٔ سینه، شانه‌ها، دست‌ها و پاها نیز با تناسبات این مدل هماهنگ شده‌اند.',
     },
   },
 }

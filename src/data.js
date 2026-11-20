@@ -28,14 +28,14 @@ export const SYSTEMS = [
   { id: 'lymphatic', name: 'Lymphatic', latin: 'Systema lymphaticum', color: '#86a07a', icon: 'node',
     blurb: 'رگ‌ها و اندام‌هایی که مایع میان‌بافتی را به خون بازمی‌گردانند و بخش مهمی از دستگاه ایمنی را در خود جای می‌دهند.' },
   { id: 'reproductive', name: 'Reproductive', latin: 'Systema genitale', color: '#bfa199', icon: 'gland',
-    blurb: 'The male reproductive structures of this reference body: they produce and transport sperm and sex hormones.' },
+    blurb: 'ساختارهای دستگاه تولیدمثل مردانه در این مدل، در تولید و انتقال سلول‌های جنسی و ترشح هورمون‌های جنسی نقش دارند.' },
   { id: 'connective', name: 'Connective tissue', latin: 'Textus connectivus', color: '#aac3b9', icon: 'link',
     blurb: 'غضروف‌ها، رباط‌ها و پرده‌هایی که ساختارهای بدن را به هم پیوند می‌دهند، ضربه‌ها را جذب می‌کنند و آن‌ها را از هم جدا می‌سازند.' },
   { id: 'integumentary', name: 'Body surface', latin: 'Integumentum', color: '#bc9c7e', icon: 'skin',
     blurb: 'سطح بیرونی بدن؛ پوششی که روی همهٔ ساختارهای زیرین قرار گرفته است.' },
   // Female body only, and hidden until switched on.
   { id: 'pregnancy', name: 'Pregnancy reference', latin: 'Graviditas', color: '#cf9aa0', icon: 'gland',
-    blurb: 'Placenta, amnion and umbilical cord from the female reference set. They model a pregnancy rather than the body itself, so they start hidden.' },
+    blurb: 'جفت، آمنیون و بند ناف در مدل مرجع زن نمایش داده شده‌اند. این ساختارها مربوط به دوران بارداری هستند و در آغاز پنهان‌اند.' },
 ]
 
 export const SYSTEM_BY_ID = Object.fromEntries(SYSTEMS.map((s) => [s.id, s]))
@@ -49,19 +49,19 @@ export const DEFAULT_VISIBLE = [
 export const FEATURED = [
   { key: 'skull', title: 'Skull', latin: 'Cranium', concepts: ['skull'], system: 'skeletal',
     tags: ['Bones', 'Protection'],
-    text: 'A helmet of tightly jointed bones that encloses the brain and frames the face, the eyes, the nose and the jaw.',
+    text: 'جمجمه از چندین استخوان به‌هم‌پیوسته تشکیل شده است؛ از مغز محافظت می‌کند و چارچوب استخوانی صورت، چشم‌ها، بینی و فک را می‌سازد.',
     facts: [['layers', 'Bones', '22 (excl. ear bones)'], ['link', 'Movable joint', 'Only the jaw']],
-    caption: 'Twenty-two bones, fitted like a puzzle.' },
+    caption: 'بیست‌ودو استخوان که مانند قطعات یک پازل در کنار هم قرار گرفته‌اند.' },
   { key: 'spine', title: 'Spine', latin: 'Columna vertebralis', concepts: ['vertebral column'], system: 'skeletal',
     tags: ['Bones', 'Support'],
-    text: 'A flexible column of stacked vertebrae that carries the head and trunk and guards the spinal cord running through it.',
+    text: 'ستون مهره‌ها زنجیره‌ای انعطاف‌پذیر از مهره‌هاست که سر و تنه را نگه می‌دارد و از نخاع عبوری از درون خود محافظت می‌کند.',
     facts: [['layers', 'Vertebrae', '33 (some fused)'], ['link', 'Curves', 'Four']],
-    caption: 'Strong enough to carry you, supple enough to bend.' },
+    caption: 'به‌اندازهٔ کافی محکم برای تحمل وزن بدن و به‌اندازهٔ کافی انعطاف‌پذیر برای خم‌شدن.' },
   { key: 'femur', title: 'Femur', latin: 'Os femoris', concepts: ['femur'], system: 'skeletal',
     tags: ['Bone', 'Lower limb'],
-    text: 'The thigh bone — the longest and strongest bone in the body, linking the hip to the knee.',
+    text: 'استخوان ران بلندترین و از محکم‌ترین استخوان‌های بدن است و مفصل ران را به زانو متصل می‌کند.',
     facts: [['ruler', 'Share of height', '≈ 26%'], ['spark', 'Strength', 'Stronger than concrete']],
-    caption: 'The longest bone you own.' },
+    caption: 'بلندترین استخوان بدن انسان.' },
 ]
 
 // "Find the …" quiz. Each round asks for one structure; a click on any of its meshes counts.
@@ -96,13 +96,13 @@ export const pretty = (name) => name.charAt(0).toUpperCase() + name.slice(1)
 // The second way in, after systems: the body cut into four regions, like an atlas.
 export const REGIONS = [
   { id: 'head', name: 'Head & neck', latin: 'Caput et collum', icon: 'head',
-    blurb: 'The skull and the brain it guards, the sense organs of the face, and the neck that carries the airway, the gullet and the great vessels to and from the head.' },
+    blurb: 'این ناحیه جمجمه و مغزِ محافظت‌شده درون آن، اندام‌های حسی صورت و گردنی را دربرمی‌گیرد که راه هوایی، مری و رگ‌های بزرگِ متصل به سر از آن عبور می‌کنند.' },
   { id: 'trunk', name: 'Trunk', latin: 'Truncus', icon: 'trunk',
-    blurb: 'Chest, abdomen and pelvis around the spine: the heart and lungs behind the ribs, the digestive organs below the diaphragm, and the kidneys against the back wall.' },
+    blurb: 'تنه شامل قفسهٔ سینه، شکم و لگن در پیرامون ستون مهره‌هاست؛ قلب و ریه‌ها پشت دنده‌ها، اندام‌های گوارشی زیر دیافراگم و کلیه‌ها در بخش پشتی شکم قرار دارند.' },
   { id: 'upper', name: 'Upper limbs', latin: 'Membra superiora', icon: 'arm',
-    blurb: 'Shoulder, arm, forearm and hand — a long chain of joints built for reach and fine grip, with the muscles, vessels and nerves that run its length.' },
+    blurb: 'اندام‌های فوقانی از شانه، بازو، ساعد و دست تشکیل شده‌اند. مفصل‌ها، ماهیچه‌ها، رگ‌ها و عصب‌های آن‌ها امکان دسترسی، گرفتن و انجام حرکت‌های دقیق را فراهم می‌کنند.' },
   { id: 'lower', name: 'Lower limbs', latin: 'Membra inferiora', icon: 'leg',
-    blurb: 'Hip to toes: the body’s largest bones and strongest muscles, made to carry the whole weight of the body and move it.' },
+    blurb: 'اندام‌های تحتانی از لگن تا انگشتان پا امتداد دارند و با استخوان‌های بزرگ و ماهیچه‌های نیرومند خود وزن بدن را تحمل می‌کنند و امکان ایستادن و راه‌رفتن را فراهم می‌سازند.' },
 ]
 export const REGION_BY_ID = Object.fromEntries(REGIONS.map((r) => [r.id, r]))
 
