@@ -15,7 +15,7 @@ const words = {
   'Shortcuts & credits':'راهنما و منابع','Shortcuts and credits':'راهنما و منابع','Close':'بستن','Clear':'پاک‌کردن','Clear selection':'لغو انتخاب','Pin label':'سنجاق‌کردن برچسب','Unpin label':'برداشتن برچسب','Pin a label on the body':'سنجاق‌کردن برچسب روی بدن','Key facts':'اطلاعات کلیدی','System':'دستگاه','Region':'ناحیه','Side':'سمت','Model size':'اندازه مدل','Meshes':'اجزای هندسی','Structure':'ساختار','Structures':'ساختار','Group':'گروه','Part of':'بخشی از','Close-up detail':'نمای نزدیک','Back to full body':'بازگشت به نمای کامل بدن','Loading anatomy':'در حال بارگذاری کالبدشناسی','Assembling anatomy':'در حال آماده‌سازی مدل بدن','Found it.':'پیدا شد!','Solid work.':'آفرین!','Here it is.':'این هم ساختار موردنظر.','Find the':'پیدا کنید:',
   'The Human Body':'بدن انسان','3D atlas':'اطلس سه‌بعدی','Free & open':'رایگان و آزاد','Source':'منبع','Source on GitHub':'کد منبع در گیت‌هاب','Whole body':'کل بدن','Bone':'استخوان','Bones':'استخوان‌ها','Protection':'محافظت','Support':'پشتیبانی','Lower limb':'اندام تحتانی',
   'Skull':'جمجمه','Spine':'ستون مهره‌ها','Femur':'استخوان ران','Sternum':'جناغ','Clavicle':'ترقوه','Scapula':'کتف','Humerus':'استخوان بازو','Tibia':'درشت‌نی','Fibula':'نازک‌نی','Patella':'کشکک','Mandible':'فک پایین','Sacrum':'استخوان خاجی','Hyoid bone':'استخوان لامی','Calcaneus':'استخوان پاشنه','Liver':'کبد','Stomach':'معده','Kidney':'کلیه','Urinary bladder':'مثانه','Spleen':'طحال','Trachea':'نای','Aorta':'آئورت','Spinal cord':'نخاع','Brain':'مغز',
-  'heart':'قلب','brain':'مغز','liver':'کبد','stomach':'معده','kidney':'کلیه','skull':'جمجمه','spine':'ستون مهره‌ها','femur':'استخوان ران','skeleton':'اسکلتی','muscular':'عضلانی','cardiac':'قلبی','arterial':'سرخرگی','venous':'سیاهرگی','nervous':'عصبی','respiratory':'تنفسی','digestive':'گوارشی','urinary':'ادراری','sensory':'حسی','endocrine':'درون‌ریز','lymphatic':'لنفاوی','reproductive':'تولیدمثل','connective':'همبند','integumentary':'پوششی',
+  'heart':'قلب','brain':'مغز','liver':'کبد','stomach':'معده','kidney':'کلیه','skull':'جمجمه','spine':'ستون مهره‌ها','femur':'استخوان ران','skeleton':'اسکلتی','muscular':'عضلانی','cardiac':'قلبی','arterial':'سرخرگی','venous':'سیاهرگی','nervous':'عصبی','respiratory':'تنفسی','digestive':'گوارشی','urinary':'ادراری','sensory':'حسی','endocrine':'درون‌ریز','lymphatic':'لنفاوی','reproductive':'تولیدمثل','connective':'همبند',
 "left lung":"ریهٔ چپ",
 "right lung":"ریهٔ راست",
 "lungs":"ریه‌ها",
@@ -77,7 +77,7 @@ const words = {
 "teeth":"دندان‌ها",
 "muscle":"ماهیچه",
 "muscles":"ماهیچه‌ها",
-"skin":"پوست",
+
 "cartilage":"غضروف",
 "ligament":"رباط",
 "tendon":"زردپی",

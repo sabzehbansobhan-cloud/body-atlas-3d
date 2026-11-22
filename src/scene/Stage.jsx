@@ -45,6 +45,17 @@ function Body() {
         if (!res.ok) throw new Error(`The ${BODIES[body].label.toLowerCase()} body couldn’t load.`)
         const atlas = await res.json()
         if (abort.signal.aborted) return
+        // The outer skin is intentionally not part of the student atlas.
+        // Filter it from both body references before indexing or creating any meshes.
+        const removedSkin = new Set(atlas.parts
+          .filter((part) => /^(skin|skin of body)$/i.test(part.name.trim()))
+          .map((part) => part.id))
+        if (removedSkin.size) {
+          atlas.parts = atlas.parts.filter((part) => !removedSkin.has(part.id))
+          atlas.concepts = atlas.concepts
+            .map((concept) => ({ ...concept, elements: concept.elements.filter((id) => !removedSkin.has(id)) }))
+            .filter((concept) => concept.elements.length > 0)
+        }
         // School-friendly male reference: remove only external genital structures.
         if (body === 'male') {
           const hidden = new Set(atlas.parts.filter((part) =>

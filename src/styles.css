@@ -55,6 +55,8 @@ html, body, #root { direction: rtl; }
 button, input { font-family: var(--sans); }
 .nav-row, .region-btn, .feature-card, .right, .panel { text-align: right; }
 html, body, #root { height: 100%; margin: 0; }
+/* Keep the document viewport locked to the device width (important in in-app WebViews). */
+html, body, #root { width: 100%; max-width: 100%; overflow-x: hidden; }
 body {
   background: var(--bg);
   transition: background-color .3s;
@@ -510,7 +512,10 @@ kbd {
   .app.no-right { grid-template-columns: 200px minmax(0, 1fr) 0; }
 }
 @media (max-width: 900px) {
-  body { overflow: auto; }
+  /* Allow vertical page scrolling on phones, but never horizontal page drift. */
+  html, body, #root { width: 100%; max-width: 100%; overflow-x: hidden; }
+  body { overflow-y: auto; overflow-x: hidden; }
+  .app { width: 100%; max-width: 100%; min-width: 0; }
   .edge-toggle, .edge-toggle[data-tip], .tool[data-tip*='Focus'], .tool[data-tip*='Ambient'], .tool[data-tip*='Studio'] { display: none; }
   .app.no-left, .app.no-right, .app.no-left.no-right { grid-template-columns: minmax(0, 1fr); }
   .nav-group .nav-label, .region-grid, .opacity-row { display: none; }

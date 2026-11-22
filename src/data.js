@@ -31,8 +31,6 @@ export const SYSTEMS = [
     blurb: 'ساختارهای دستگاه تولیدمثل مردانه در این مدل، در تولید و انتقال سلول‌های جنسی و ترشح هورمون‌های جنسی نقش دارند.' },
   { id: 'connective', name: 'Connective tissue', latin: 'Textus connectivus', color: '#aac3b9', icon: 'link',
     blurb: 'غضروف‌ها، رباط‌ها و پرده‌هایی که ساختارهای بدن را به هم پیوند می‌دهند، ضربه‌ها را جذب می‌کنند و آن‌ها را از هم جدا می‌سازند.' },
-  { id: 'integumentary', name: 'Body surface', latin: 'Integumentum', color: '#bc9c7e', icon: 'skin',
-    blurb: 'سطح بیرونی بدن؛ پوششی که روی همهٔ ساختارهای زیرین قرار گرفته است.' },
   // Female body only, and hidden until switched on.
   { id: 'pregnancy', name: 'Pregnancy reference', latin: 'Graviditas', color: '#cf9aa0', icon: 'gland',
     blurb: 'جفت، آمنیون و بند ناف در مدل مرجع زن نمایش داده شده‌اند. این ساختارها مربوط به دوران بارداری هستند و در آغاز پنهان‌اند.' },
@@ -40,7 +38,7 @@ export const SYSTEMS = [
 
 export const SYSTEM_BY_ID = Object.fromEntries(SYSTEMS.map((s) => [s.id, s]))
 
-// Muscles and skin hide the organs, so they start switched off.
+// Muscles hide the organs, so they start switched off.
 export const DEFAULT_VISIBLE = [
   'skeletal', 'cardiac', 'arterial', 'venous', 'nervous', 'respiratory', 'digestive',
   'urinary', 'sensory', 'endocrine', 'lymphatic', 'reproductive', 'connective',
