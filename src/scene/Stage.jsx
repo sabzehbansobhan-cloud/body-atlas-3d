@@ -45,6 +45,17 @@ function Body() {
         if (!res.ok) throw new Error(`The ${BODIES[body].label.toLowerCase()} body couldn’t load.`)
         const atlas = await res.json()
         if (abort.signal.aborted) return
+        // Hair and outer skin are intentionally excluded from the student atlas.
+        // Filter them before indexing or creating any meshes.
+        const removedHair = new Set(atlas.parts
+          .filter((part) => /\b(hair|eyebrow|beard|moustache|mustache|whisker)\b/i.test(part.name.trim()))
+          .map((part) => part.id))
+        if (removedHair.size) {
+          atlas.parts = atlas.parts.filter((part) => !removedHair.has(part.id))
+          atlas.concepts = atlas.concepts
+            .map((concept) => ({ ...concept, elements: concept.elements.filter((id) => !removedHair.has(id)) }))
+            .filter((concept) => concept.elements.length > 0)
+        }
         // The outer skin is intentionally not part of the student atlas.
         // Filter it from both body references before indexing or creating any meshes.
         const removedSkin = new Set(atlas.parts
