@@ -31,6 +31,9 @@ export const SYSTEMS = [
     blurb: 'ساختارهای دستگاه تولیدمثل مردانه در این مدل، در تولید و انتقال سلول‌های جنسی و ترشح هورمون‌های جنسی نقش دارند.' },
   { id: 'connective', name: 'Connective tissue', latin: 'Textus connectivus', color: '#aac3b9', icon: 'link',
     blurb: 'غضروف‌ها، رباط‌ها و پرده‌هایی که ساختارهای بدن را به هم پیوند می‌دهند، ضربه‌ها را جذب می‌کنند و آن‌ها را از هم جدا می‌سازند.' },
+  // Female body only: mammary anatomy is independently switchable; the outer skin mesh is removed.
+  { id: 'integumentary', name: 'Mammary structures', latin: 'Glandulae mammariae', color: '#bc9c7e', icon: 'gland',
+    blurb: 'ساختارهای غدهٔ پستانی، مجاری شیری، هاله و نوک پستان؛ این لایه جداگانه کنترل می‌شود و به‌طور پیش‌فرض پنهان است.' },
   // Female body only, and hidden until switched on.
   { id: 'pregnancy', name: 'Pregnancy reference', latin: 'Graviditas', color: '#cf9aa0', icon: 'gland',
     blurb: 'جفت، آمنیون و بند ناف در مدل مرجع زن نمایش داده شده‌اند. این ساختارها مربوط به دوران بارداری هستند و در آغاز پنهان‌اند.' },
