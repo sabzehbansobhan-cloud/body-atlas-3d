@@ -42,3 +42,6 @@ The male skeleton and skeletal-muscle layers in `public/models/atlas.json` were 
 - License: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0): https://creativecommons.org/licenses/by-sa/4.0/
 
 The Ecorche source contains 634 individual meshes: 362 assigned to the muscular system and 272 assigned to the skeletal system according to the source GLB's `Muscle` and `Bone` materials. The source also includes cartilage, teeth, disks and other structures in the `Bone` material group; these are shown under the skeletal layer in this viewer. This is an educational reference, not a clinical model.
+
+
+**Female abdominal muscle supplement.** Six abdominal-wall meshes (bilateral rectus abdominis, internal oblique and transversus abdominis) from the supplied Ecorche GLB were added to the female atlas as individually selectable structures. Their coordinates were modestly fitted to the female reference torso; they are an educational anatomical approximation, not female-specific scan data. These adapted meshes are distributed under the Ecorche derivative's CC BY-SA 4.0 terms.
