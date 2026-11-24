@@ -7,7 +7,7 @@
 **Explore the human body in 3D — right in your browser.**
 
 Turn a full adult body, peel it back system by system or region by region, pull it apart,
-pin labels to it, click any of 2,234 structures and open 14 organs in detailed models.
+pin labels to it, click any of 2,166 structures and open 14 organs in detailed models.
 Installs as an app and keeps working offline. No plugin.
 
 [![React 19](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=white)](https://react.dev)
@@ -48,9 +48,9 @@ Installs as an app and keeps working offline. No plugin.
 
 <table>
   <tr>
-    <td align="center"><b>2,234</b><br /><sub>selectable structures</sub></td>
+    <td align="center"><b>2,166</b><br /><sub>selectable structures</sub></td>
     <td align="center"><b>15 + 4</b><br /><sub>systems + regions</sub></td>
-    <td align="center"><b>3,432</b><br /><sub>searchable names</sub></td>
+    <td align="center"><b>3,481</b><br /><sub>searchable names</sub></td>
     <td align="center"><b>14</b><br /><sub>organ deep-dives</sub></td>
     <td align="center"><b>~14</b><br /><sub>draw calls for 2.29 M triangles</sub></td>
   </tr>
@@ -78,7 +78,7 @@ Installs as an app and keeps working offline. No plugin.
 ## ✦ Features
 
 **See**
-- **Whole-body model** — 2,234 meshes from BodyParts3D 4.0, grouped into 15 systems.
+- **Whole-body model** — 2,166 selectable meshes across 15 systems. The male skeleton and muscles use 634 Ecorche meshes (BodyParts3D + Z-Anatomy); other male systems and the female atlas are retained.
 - **Male and female bodies** — switch between the BodyParts3D male and the HuBMAP female
   reference set (888 meshes, plus 1,646 fitted BodyParts3D bones, muscles, vessels, nerves and
   glands, so both bodies have every system); the choice is kept in the link as `?body=female`.
