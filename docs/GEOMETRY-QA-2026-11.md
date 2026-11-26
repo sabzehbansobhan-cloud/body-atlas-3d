@@ -1,27 +1,39 @@
-# Geometry metadata QA — 25 November 2026
+# Geometry QA — 26 November 2026
 
 ## Scope
 
-This pass audits the packed male and female atlas manifests and geometry buffers. It is a data-integrity repair, not a claim of medical-grade anatomical validation.
+The packed male and female atlases were audited at the vertex-buffer level. This is a geometry-consistency repair, not a claim of medical-grade anatomical validation.
 
-## Repairs applied
+## Repairs retained from QA-pass1
 
-- Recomputed every part's axis-aligned bounds directly from its packed Float32 vertex positions in both atlases. This removes stale bounds that did not describe the geometry actually rendered. The most severe male examples were the right sclera and right lens suspensory ligament, whose stored X bounds extended across the midline although their actual vertices did not.
-- Removed four duplicate male eye meshes imported from the Ecorche asset (two sclera and two cornea meshes). The original BodyParts3D eye meshes remain and are the meshes referenced by the left/right eyeball concepts. The Ecorche duplicates were shifted about 20 mm anteriorly relative to the original eye components, creating a second displaced surface.
-- Reclassified the third, fourth and lateral cerebral ventricles and the interventricular foramen from the cardiac system to the nervous system.
+- Recomputed every part's axis-aligned bounds directly from its packed Float32 vertex positions in both atlases. This fixes stale bounds used for selection centres, exploded-view centres and framing.
+- Removed four duplicate male Ecorche eye meshes (two sclera and two cornea meshes) that sat about 20 mm anterior to the original BodyParts3D eye components. The original left/right eye components remain.
+- Reclassified the third, fourth and lateral cerebral ventricles and interventricular foramen from cardiac to nervous system.
+
+## New female knee repair
+
+The female atlas combines HuBMAP Female Reference Atlas structures with BodyParts3D structures fitted to the reference body. A direct vertex-centroid comparison showed that the VH knee soft-tissue structures were displaced laterally from the BP3D distal femur/proximal tibia landmarks:
+
+- The distal femur/proximal tibia joint centres are approximately x = ±0.069 m.
+- The ACL/PCL and meniscus centroids were around x = +0.116 m on the left and x = −0.137 m on the right, visibly outside the knee joint.
+- The anterolateral ligament meshes were even farther lateral.
+
+Corrected eight meshes: left/right anterior cruciate ligament, posterior cruciate ligament, meniscus (articular disk), and anterolateral ligament. Their X translations bring the ACL/PCL and menisci onto the femorotibial joint centreline and the anterolateral ligaments onto the lateral fibular-side attachment region. Menisci were also raised 11 mm so they sit at the joint line. All eight structures were reclassified from skeletal to connective tissue, matching their anatomy. Only vertex positions, their bounds, and system tags changed; topology and vertex counts were preserved.
+
+The one-time operation is recorded in `atlas-female.json` as `geometryRepairs: ["female-knee-alignment-2026-11"]`. Its script refuses to run twice.
 
 ## Validation performed
 
-- Both manifests parse and have unique part IDs.
-- Every part references an existing chunk and valid byte ranges for positions, normals and indices.
-- Every index is within its part's vertex range.
-- No non-finite vertex positions or normals were found.
-- No repeated-index degenerate triangles were found.
-- Geometry buffers were not translated, scaled, rotated or otherwise modified.
+- Both manifests parse; part IDs are unique.
+- Every chunk exists and matches the manifest byte counts.
+- Every part's index range is valid and all indices are within its vertex range.
+- Vertex positions and normals contain no non-finite values.
+- The female knee repair was rendered in an isolated close-up before and after; the detached lateral loops are now located at the knee rather than floating outside it.
+- `node scripts/check-assets.mjs public` passed: 59 public assets checked.
+- Female atlas remains 3,004 parts / 3,893,539 triangles; male atlas remains 2,162 parts / 2,214,204 triangles.
 
-## Known limitations
+## Remaining limitations
 
-- Correct bounds improve selection centres, exploded-view centres and body framing, but do not move a misplaced mesh.
-- This pass does not prove that the brain is correctly enclosed by the skull, that every eye component sits correctly in the orbit, or that female knee ligaments are anatomically aligned.
-- The female atlas remains a composite of HuBMAP Female Reference Atlas structures and fitted BodyParts3D structures, as described in `public/ATTRIBUTION.md`.
-- Browser rendering and visual QA on the target phone/tablet remain necessary. Build dependencies were not available in this environment, so a production build was not certified in this pass.
+- The browser production build could not be certified in this environment because the archived `node_modules` tree does not contain installed package files and dependency installation timed out.
+- This repair addresses the clearly measurable female knee displacement. It does not certify every mixed-source female organ, eye, muscle or vessel placement against medical imaging.
+- Final visual acceptance should still be done in the actual browser on the target phone/tablet. No website deployment was performed.
